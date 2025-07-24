@@ -1,0 +1,9 @@
+engine/build
+/.env
+/.env.*
+
+# Cursor IDE files
+.cursorindexingignore
+
+# Spec Story files
+.specstory/

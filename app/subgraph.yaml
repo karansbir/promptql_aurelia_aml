@@ -1,0 +1,27 @@
+kind: Subgraph
+version: v2
+definition:
+  name: app
+  generator:
+    rootPath: .
+    namingConvention: snake_case
+  includePaths:
+    - metadata
+  envMapping:
+    APP_MONGO_AUTHORIZATION_HEADER:
+      fromEnv: APP_MONGO_AUTHORIZATION_HEADER
+    APP_MONGO_READ_URL:
+      fromEnv: APP_MONGO_READ_URL
+    APP_MONGO_WRITE_URL:
+      fromEnv: APP_MONGO_WRITE_URL
+    APP_PG_AUTHORIZATION_HEADER:
+      fromEnv: APP_PG_AUTHORIZATION_HEADER
+    APP_PG_READ_URL:
+      fromEnv: APP_PG_READ_URL
+    APP_PG_WRITE_URL:
+      fromEnv: APP_PG_WRITE_URL
+  connectors:
+    - path: connector/pg/connector.yaml
+      connectorLinkName: pg
+    - path: connector/mongo/connector.yaml
+      connectorLinkName: mongo

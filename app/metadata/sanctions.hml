@@ -1,0 +1,192 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: sanctions
+  fields:
+    - name: id
+      type: String!
+    - name: address
+      type: String
+    - name: entity_name
+      type: String
+    - name: entity_type
+      type: String
+    - name: list_type
+      type: String
+    - name: listed_date
+      type: String
+    - name: program
+      type: String
+  graphql:
+    typeName: sanctions
+    inputTypeName: sanctions_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: mongo
+      dataConnectorObjectType: sanctions
+      fieldMapping:
+        id:
+          column:
+            name: _id
+        address:
+          column:
+            name: address
+        entity_name:
+          column:
+            name: entity_name
+        entity_type:
+          column:
+            name: entity_type
+        list_type:
+          column:
+            name: list_type
+        listed_date:
+          column:
+            name: listed_date
+        program:
+          column:
+            name: program
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: sanctions
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - id
+          - address
+          - entity_name
+          - entity_type
+          - list_type
+          - listed_date
+          - program
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: sanctions_bool_exp
+  operand:
+    object:
+      type: sanctions
+      comparableFields:
+        - fieldName: id
+          booleanExpressionType: string_bool_exp
+        - fieldName: address
+          booleanExpressionType: string_bool_exp
+        - fieldName: entity_name
+          booleanExpressionType: string_bool_exp
+        - fieldName: entity_type
+          booleanExpressionType: string_bool_exp
+        - fieldName: list_type
+          booleanExpressionType: string_bool_exp
+        - fieldName: listed_date
+          booleanExpressionType: string_bool_exp
+        - fieldName: program
+          booleanExpressionType: string_bool_exp
+      comparableRelationships: []
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: sanctions_bool_exp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: sanctions_agg_exp
+  operand:
+    object:
+      aggregatedType: sanctions
+      aggregatableFields:
+        - fieldName: id
+          aggregateExpression: string_agg_exp
+        - fieldName: address
+          aggregateExpression: string_agg_exp
+        - fieldName: entity_name
+          aggregateExpression: string_agg_exp
+        - fieldName: entity_type
+          aggregateExpression: string_agg_exp
+        - fieldName: list_type
+          aggregateExpression: string_agg_exp
+        - fieldName: listed_date
+          aggregateExpression: string_agg_exp
+        - fieldName: program
+          aggregateExpression: string_agg_exp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: sanctions_agg_exp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: sanctions_order_by_exp
+  operand:
+    object:
+      orderedType: sanctions
+      orderableFields:
+        - fieldName: id
+          orderByExpression: string_order_by_exp_1
+        - fieldName: address
+          orderByExpression: string_order_by_exp_1
+        - fieldName: entity_name
+          orderByExpression: string_order_by_exp_1
+        - fieldName: entity_type
+          orderByExpression: string_order_by_exp_1
+        - fieldName: list_type
+          orderByExpression: string_order_by_exp_1
+        - fieldName: listed_date
+          orderByExpression: string_order_by_exp_1
+        - fieldName: program
+          orderByExpression: string_order_by_exp_1
+      orderableRelationships: []
+  graphql:
+    expressionTypeName: sanctions_order_by_exp
+
+---
+kind: Model
+version: v2
+definition:
+  name: sanctions
+  objectType: sanctions
+  source:
+    dataConnectorName: mongo
+    collection: sanctions
+  filterExpressionType: sanctions_bool_exp
+  aggregateExpression: sanctions_agg_exp
+  orderByExpression: sanctions_order_by_exp
+  graphql:
+    selectMany:
+      queryRootField: sanctions
+      subscription:
+        rootField: sanctions
+    selectUniques:
+      - queryRootField: sanctions_by_id
+        uniqueIdentifier:
+          - id
+        subscription:
+          rootField: sanctions_by_id
+    filterInputTypeName: sanctions_filter_input
+    aggregate:
+      queryRootField: sanctions_aggregate
+      subscription:
+        rootField: sanctions_aggregate
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: sanctions
+  permissions:
+    - role: admin
+      select:
+        filter: null
+        allowSubscriptions: true
+

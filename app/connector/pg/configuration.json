@@ -1,0 +1,376 @@
+{
+    "version": "v2",
+    "connection_uri": {
+        "variable": "JDBC_URL"
+    },
+    "tables": [
+        {
+            "name": "public.customers",
+            "description": null,
+            "category": "TABLE",
+            "columns": [
+                {
+                    "name": "customer_id",
+                    "nullable": false,
+                    "auto_increment": false,
+                    "is_primarykey": false,
+                    "data": {
+                        "database_type": "integer",
+                        "metadata": {
+                            "type": "numeric",
+                            "precision": 32,
+                            "scale": 0
+                        }
+                    }
+                },
+                {
+                    "name": "name",
+                    "nullable": false,
+                    "auto_increment": false,
+                    "is_primarykey": false,
+                    "data": {
+                        "database_type": "character_varying",
+                        "metadata": {
+                            "type": "length",
+                            "length": 255
+                        }
+                    }
+                },
+                {
+                    "name": "account",
+                    "nullable": false,
+                    "auto_increment": false,
+                    "is_primarykey": false,
+                    "data": {
+                        "database_type": "integer",
+                        "metadata": {
+                            "type": "numeric",
+                            "precision": 32,
+                            "scale": 0
+                        }
+                    }
+                },
+                {
+                    "name": "dob",
+                    "nullable": true,
+                    "auto_increment": false,
+                    "is_primarykey": false,
+                    "data": {
+                        "database_type": "date"
+                    }
+                },
+                {
+                    "name": "nationality",
+                    "nullable": true,
+                    "auto_increment": false,
+                    "is_primarykey": false,
+                    "data": {
+                        "database_type": "character_varying",
+                        "metadata": {
+                            "type": "length",
+                            "length": 50
+                        }
+                    }
+                },
+                {
+                    "name": "address",
+                    "nullable": true,
+                    "auto_increment": false,
+                    "is_primarykey": false,
+                    "data": {
+                        "database_type": "text"
+                    }
+                },
+                {
+                    "name": "risk_level",
+                    "nullable": true,
+                    "auto_increment": false,
+                    "is_primarykey": false,
+                    "data": {
+                        "database_type": "character_varying",
+                        "metadata": {
+                            "type": "length",
+                            "length": 10
+                        }
+                    }
+                },
+                {
+                    "name": "pep_status",
+                    "nullable": true,
+                    "auto_increment": false,
+                    "is_primarykey": false,
+                    "data": {
+                        "database_type": "boolean"
+                    }
+                },
+                {
+                    "name": "blacklisted",
+                    "nullable": true,
+                    "auto_increment": false,
+                    "is_primarykey": false,
+                    "data": {
+                        "database_type": "boolean"
+                    }
+                }
+            ],
+            "primary_keys": [],
+            "foreign_keys": {}
+        },
+        {
+            "name": "public.financial_transfers",
+            "description": null,
+            "category": "TABLE",
+            "columns": [
+                {
+                    "name": "transaction_id",
+                    "nullable": false,
+                    "auto_increment": false,
+                    "is_primarykey": false,
+                    "data": {
+                        "database_type": "integer",
+                        "metadata": {
+                            "type": "numeric",
+                            "precision": 32,
+                            "scale": 0
+                        }
+                    }
+                },
+                {
+                    "name": "time",
+                    "nullable": true,
+                    "auto_increment": false,
+                    "is_primarykey": false,
+                    "data": {
+                        "database_type": "character_varying",
+                        "metadata": {
+                            "type": "length",
+                            "length": 5
+                        }
+                    }
+                },
+                {
+                    "name": "date",
+                    "nullable": true,
+                    "auto_increment": false,
+                    "is_primarykey": false,
+                    "data": {
+                        "database_type": "date"
+                    }
+                },
+                {
+                    "name": "sender_account",
+                    "nullable": true,
+                    "auto_increment": false,
+                    "is_primarykey": false,
+                    "data": {
+                        "database_type": "integer",
+                        "metadata": {
+                            "type": "numeric",
+                            "precision": 32,
+                            "scale": 0
+                        }
+                    }
+                },
+                {
+                    "name": "receiver_account",
+                    "nullable": true,
+                    "auto_increment": false,
+                    "is_primarykey": false,
+                    "data": {
+                        "database_type": "integer",
+                        "metadata": {
+                            "type": "numeric",
+                            "precision": 32,
+                            "scale": 0
+                        }
+                    }
+                },
+                {
+                    "name": "amount",
+                    "nullable": true,
+                    "auto_increment": false,
+                    "is_primarykey": false,
+                    "data": {
+                        "database_type": "numeric",
+                        "metadata": {
+                            "type": "numeric",
+                            "precision": 10,
+                            "scale": 2
+                        }
+                    }
+                },
+                {
+                    "name": "payment_currency",
+                    "nullable": true,
+                    "auto_increment": false,
+                    "is_primarykey": false,
+                    "data": {
+                        "database_type": "character_varying",
+                        "metadata": {
+                            "type": "length",
+                            "length": 5
+                        }
+                    }
+                },
+                {
+                    "name": "received_currency",
+                    "nullable": true,
+                    "auto_increment": false,
+                    "is_primarykey": false,
+                    "data": {
+                        "database_type": "character_varying",
+                        "metadata": {
+                            "type": "length",
+                            "length": 5
+                        }
+                    }
+                },
+                {
+                    "name": "sender_bank_location",
+                    "nullable": true,
+                    "auto_increment": false,
+                    "is_primarykey": false,
+                    "data": {
+                        "database_type": "character_varying",
+                        "metadata": {
+                            "type": "length",
+                            "length": 50
+                        }
+                    }
+                },
+                {
+                    "name": "receiver_bank_location",
+                    "nullable": true,
+                    "auto_increment": false,
+                    "is_primarykey": false,
+                    "data": {
+                        "database_type": "character_varying",
+                        "metadata": {
+                            "type": "length",
+                            "length": 50
+                        }
+                    }
+                },
+                {
+                    "name": "payment_type",
+                    "nullable": true,
+                    "auto_increment": false,
+                    "is_primarykey": false,
+                    "data": {
+                        "database_type": "character_varying",
+                        "metadata": {
+                            "type": "length",
+                            "length": 10
+                        }
+                    }
+                },
+                {
+                    "name": "is_laundering",
+                    "nullable": true,
+                    "auto_increment": false,
+                    "is_primarykey": false,
+                    "data": {
+                        "database_type": "boolean"
+                    }
+                },
+                {
+                    "name": "laundering_type",
+                    "nullable": true,
+                    "auto_increment": false,
+                    "is_primarykey": false,
+                    "data": {
+                        "database_type": "character_varying",
+                        "metadata": {
+                            "type": "length",
+                            "length": 20
+                        }
+                    }
+                }
+            ],
+            "primary_keys": [],
+            "foreign_keys": {}
+        },
+        {
+            "name": "public.sars",
+            "description": null,
+            "category": "TABLE",
+            "columns": [
+                {
+                    "name": "sar_id",
+                    "nullable": false,
+                    "auto_increment": false,
+                    "is_primarykey": false,
+                    "data": {
+                        "database_type": "integer",
+                        "metadata": {
+                            "type": "numeric",
+                            "precision": 32,
+                            "scale": 0
+                        }
+                    }
+                },
+                {
+                    "name": "customer_id",
+                    "nullable": true,
+                    "auto_increment": false,
+                    "is_primarykey": false,
+                    "data": {
+                        "database_type": "integer",
+                        "metadata": {
+                            "type": "numeric",
+                            "precision": 32,
+                            "scale": 0
+                        }
+                    }
+                },
+                {
+                    "name": "transaction_id",
+                    "nullable": true,
+                    "auto_increment": false,
+                    "is_primarykey": false,
+                    "data": {
+                        "database_type": "integer",
+                        "metadata": {
+                            "type": "numeric",
+                            "precision": 32,
+                            "scale": 0
+                        }
+                    }
+                },
+                {
+                    "name": "reason",
+                    "nullable": true,
+                    "auto_increment": false,
+                    "is_primarykey": false,
+                    "data": {
+                        "database_type": "text"
+                    }
+                },
+                {
+                    "name": "status",
+                    "nullable": true,
+                    "auto_increment": false,
+                    "is_primarykey": false,
+                    "data": {
+                        "database_type": "character_varying",
+                        "metadata": {
+                            "type": "length",
+                            "length": 10
+                        }
+                    }
+                },
+                {
+                    "name": "filed_date",
+                    "nullable": true,
+                    "auto_increment": false,
+                    "is_primarykey": false,
+                    "data": {
+                        "database_type": "timestamp_without_time_zone"
+                    }
+                }
+            ],
+            "primary_keys": [],
+            "foreign_keys": {}
+        }
+    ]
+}

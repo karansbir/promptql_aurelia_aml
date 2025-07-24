@@ -1,0 +1,312 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: aml_cases_aml_flags
+  fields:
+    - name: cross_border
+      type: boolean
+    - name: darknet
+      type: boolean
+    - name: structuring
+      type: boolean
+  graphql:
+    typeName: aml_cases_aml_flags
+    inputTypeName: aml_cases_aml_flags_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: mongo
+      dataConnectorObjectType: aml_cases_aml_flags
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: aml_cases_aml_flags
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - cross_border
+          - darknet
+          - structuring
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: aml_cases
+  fields:
+    - name: id
+      type: string!
+    - name: aml_flags
+      type: aml_cases_aml_flags
+    - name: amount
+      type: float_64
+    - name: beneficiary_address
+      type: String
+    - name: beneficiary_id
+      type: Int
+    - name: beneficiary_name
+      type: String
+    - name: originator_address
+      type: String
+    - name: originator_id
+      type: Int
+    - name: originator_name
+      type: String
+    - name: transaction_date
+      type: String
+    - name: transaction_id
+      type: Int
+  graphql:
+    typeName: aml_cases
+    inputTypeName: aml_cases_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: mongo
+      dataConnectorObjectType: aml_cases
+      fieldMapping:
+        id:
+          column:
+            name: _id
+        aml_flags:
+          column:
+            name: aml_flags
+        amount:
+          column:
+            name: amount
+        beneficiary_address:
+          column:
+            name: beneficiary_address
+        beneficiary_id:
+          column:
+            name: beneficiary_id
+        beneficiary_name:
+          column:
+            name: beneficiary_name
+        originator_address:
+          column:
+            name: originator_address
+        originator_id:
+          column:
+            name: originator_id
+        originator_name:
+          column:
+            name: originator_name
+        transaction_date:
+          column:
+            name: transaction_date
+        transaction_id:
+          column:
+            name: transaction_id
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: aml_cases
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - id
+          - aml_flags
+          - amount
+          - beneficiary_address
+          - beneficiary_id
+          - beneficiary_name
+          - originator_address
+          - originator_id
+          - originator_name
+          - transaction_date
+          - transaction_id
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: aml_cases_aml_flags_bool_exp
+  operand:
+    object:
+      type: aml_cases_aml_flags
+      comparableFields:
+        - fieldName: cross_border
+          booleanExpressionType: bool_bool_exp
+        - fieldName: darknet
+          booleanExpressionType: bool_bool_exp
+        - fieldName: structuring
+          booleanExpressionType: bool_bool_exp
+      comparableRelationships: []
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: aml_cases_aml_flags_bool_exp
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: aml_cases_bool_exp
+  operand:
+    object:
+      type: aml_cases
+      comparableFields:
+        - fieldName: id
+          booleanExpressionType: object_id_bool_exp
+        - fieldName: aml_flags
+          booleanExpressionType: aml_cases_aml_flags_bool_exp
+        - fieldName: amount
+          booleanExpressionType: double_bool_exp
+        - fieldName: beneficiary_address
+          booleanExpressionType: string_bool_exp
+        - fieldName: beneficiary_id
+          booleanExpressionType: int_bool_exp
+        - fieldName: beneficiary_name
+          booleanExpressionType: string_bool_exp
+        - fieldName: originator_address
+          booleanExpressionType: string_bool_exp
+        - fieldName: originator_id
+          booleanExpressionType: int_bool_exp
+        - fieldName: originator_name
+          booleanExpressionType: string_bool_exp
+        - fieldName: transaction_date
+          booleanExpressionType: string_bool_exp
+        - fieldName: transaction_id
+          booleanExpressionType: int_bool_exp
+      comparableRelationships: []
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: aml_cases_bool_exp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: aml_cases_agg_exp
+  operand:
+    object:
+      aggregatedType: aml_cases
+      aggregatableFields:
+        - fieldName: id
+          aggregateExpression: object_id_agg_exp
+        - fieldName: amount
+          aggregateExpression: double_agg_exp
+        - fieldName: beneficiary_address
+          aggregateExpression: string_agg_exp
+        - fieldName: beneficiary_id
+          aggregateExpression: int_agg_exp
+        - fieldName: beneficiary_name
+          aggregateExpression: string_agg_exp
+        - fieldName: originator_address
+          aggregateExpression: string_agg_exp
+        - fieldName: originator_id
+          aggregateExpression: int_agg_exp
+        - fieldName: originator_name
+          aggregateExpression: string_agg_exp
+        - fieldName: transaction_date
+          aggregateExpression: string_agg_exp
+        - fieldName: transaction_id
+          aggregateExpression: int_agg_exp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: aml_cases_agg_exp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: aml_cases_aml_flags_order_by_exp
+  operand:
+    object:
+      orderedType: aml_cases_aml_flags
+      orderableFields:
+        - fieldName: cross_border
+          orderByExpression: boolean_order_by_exp
+        - fieldName: darknet
+          orderByExpression: boolean_order_by_exp
+        - fieldName: structuring
+          orderByExpression: boolean_order_by_exp
+      orderableRelationships: []
+  graphql:
+    expressionTypeName: aml_cases_aml_flags_order_by_exp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: aml_cases_order_by_exp
+  operand:
+    object:
+      orderedType: aml_cases
+      orderableFields:
+        - fieldName: id
+          orderByExpression: string_order_by_exp
+        - fieldName: aml_flags
+          orderByExpression: aml_cases_aml_flags_order_by_exp
+        - fieldName: amount
+          orderByExpression: float_64_order_by_exp
+        - fieldName: beneficiary_address
+          orderByExpression: string_order_by_exp_1
+        - fieldName: beneficiary_id
+          orderByExpression: int_order_by_exp
+        - fieldName: beneficiary_name
+          orderByExpression: string_order_by_exp_1
+        - fieldName: originator_address
+          orderByExpression: string_order_by_exp_1
+        - fieldName: originator_id
+          orderByExpression: int_order_by_exp
+        - fieldName: originator_name
+          orderByExpression: string_order_by_exp_1
+        - fieldName: transaction_date
+          orderByExpression: string_order_by_exp_1
+        - fieldName: transaction_id
+          orderByExpression: int_order_by_exp
+      orderableRelationships: []
+  graphql:
+    expressionTypeName: aml_cases_order_by_exp
+
+---
+kind: Model
+version: v2
+definition:
+  name: aml_cases
+  objectType: aml_cases
+  source:
+    dataConnectorName: mongo
+    collection: aml_cases
+  filterExpressionType: aml_cases_bool_exp
+  aggregateExpression: aml_cases_agg_exp
+  orderByExpression: aml_cases_order_by_exp
+  graphql:
+    selectMany:
+      queryRootField: aml_cases
+      subscription:
+        rootField: aml_cases
+    selectUniques:
+      - queryRootField: aml_cases_by_id
+        uniqueIdentifier:
+          - id
+        subscription:
+          rootField: aml_cases_by_id
+    filterInputTypeName: aml_cases_filter_input
+    aggregate:
+      queryRootField: aml_cases_aggregate
+      subscription:
+        rootField: aml_cases_aggregate
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: aml_cases
+  permissions:
+    - role: admin
+      select:
+        filter: null
+        allowSubscriptions: true
+
