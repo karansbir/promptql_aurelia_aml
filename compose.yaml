@@ -1,6 +1,7 @@
 include:
   - path: app/connector/pg/compose.yaml
   - path: app/connector/mongo/compose.yaml
+  - path: app/connector/ofac/compose.yaml
 services:
   engine:
     build:

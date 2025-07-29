@@ -1,0 +1,26 @@
+---
+kind: Command
+version: v1
+definition:
+  name: parallel_query
+  outputType: String!
+  arguments:
+    - name: name
+      type: String!
+  source:
+    dataConnectorName: ofac
+    dataConnectorCommand:
+      function: parallel_query
+  graphql:
+    rootFieldName: parallel_query
+    rootFieldKind: Query
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: parallel_query
+  permissions:
+    - role: admin
+      allowExecution: true
+

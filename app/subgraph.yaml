@@ -14,6 +14,14 @@ definition:
       fromEnv: APP_MONGO_READ_URL
     APP_MONGO_WRITE_URL:
       fromEnv: APP_MONGO_WRITE_URL
+    APP_OFAC_AUTHORIZATION_HEADER:
+      fromEnv: APP_OFAC_AUTHORIZATION_HEADER
+    APP_OFAC_READ_URL:
+      fromEnv: APP_OFAC_READ_URL
+    APP_OFAC_OPENSANCTIONS_API_KEY:
+      fromEnv: APP_OFAC_OPENSANCTIONS_API_KEY
+    APP_OFAC_WRITE_URL:
+      fromEnv: APP_OFAC_WRITE_URL
     APP_PG_AUTHORIZATION_HEADER:
       fromEnv: APP_PG_AUTHORIZATION_HEADER
     APP_PG_READ_URL:
@@ -25,3 +33,5 @@ definition:
       connectorLinkName: pg
     - path: connector/mongo/connector.yaml
       connectorLinkName: mongo
+    - path: connector/ofac/connector.yaml
+      connectorLinkName: ofac

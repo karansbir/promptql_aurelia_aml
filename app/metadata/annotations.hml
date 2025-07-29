@@ -1,0 +1,90 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: annotations_foo
+  fields:
+    - name: bar
+      type: String!
+      description: The bar field
+    - name: baz
+      type: String!
+      description: The baz field
+  graphql:
+    typeName: annotations_foo
+    inputTypeName: annotations_foo_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: ofac
+      dataConnectorObjectType: annotations_foo
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: annotations_foo
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - bar
+          - baz
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: annotations
+  fields:
+    - name: bar
+      type: String!
+      description: The bar field
+    - name: baz
+      type: String!
+      description: The baz field
+  graphql:
+    typeName: annotations
+    inputTypeName: annotations_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: ofac
+      dataConnectorObjectType: annotations
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: annotations
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - bar
+          - baz
+
+---
+kind: Command
+version: v1
+definition:
+  name: annotations
+  outputType: annotations
+  arguments:
+    - name: foo
+      type: annotations_foo
+      description: The optional input Foo
+  source:
+    dataConnectorName: ofac
+    dataConnectorCommand:
+      function: annotations
+  graphql:
+    rootFieldName: annotations
+    rootFieldKind: Query
+  description: Writing a doc-string like this will become the function/procedure description
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: annotations
+  permissions:
+    - role: admin
+      allowExecution: true
+

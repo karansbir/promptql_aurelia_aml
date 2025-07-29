@@ -1,9 +1,11 @@
 engine/build
 /.env
 /.env.*
+.claude
 
 # Cursor IDE files
 .cursorindexingignore
 
 # Spec Story files
 .specstory/
+

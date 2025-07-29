@@ -29,16 +29,4 @@ definition:
     - Output structured: Summary, query plan (with full MongoDB code), results, recommendations.
     - If syntax is complex, break into stages and test logically.
 
-    Few-shot examples for MongoDB queries:
-    - Natural language: "Find accounts with high risk level." 
-      MongoDB query: db.Accounts.find({ "risk_level": "high" }).limit(10);
-    - Natural language: "Aggregate total volumes in AML Cases for flagged counterparties in the last 30 days."
-      MongoDB query: db.AML_Cases.aggregate([
-        { $match: { flags: { $in: ["suspicious"] }, "timestamps": { $gte: new Date(new Date() - 30*24*60*60*1000) } } },
-        { $unwind: "$volumes" },
-        { $group: { _id: "$counterparties", totalVolume: { $sum: "$volumes" } } }
-      ]);
-    - Natural language: "Check sanctions for entities in a specific country."
-      MongoDB query: db.Sanctions.find({ "country_classifications.country": "HighRiskCountry", "sanctioned_entities": { $exists: true } });
-
     Base insights only on data; suggest refinements if ambiguous.  

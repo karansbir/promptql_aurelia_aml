@@ -1,0 +1,64 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: test_api_key_env
+  fields:
+    - name: api_key_exists
+      type: Boolean!
+      description: Whether the API key environment variable exists
+    - name: api_key_length
+      type: Int!
+      description: Length of the API key (0 if not found)
+    - name: api_key_preview
+      type: String!
+      description: First 10 characters of API key (masked if longer)
+    - name: env_var_name
+      type: String!
+      description: Environment variable name being checked
+  graphql:
+    typeName: test_api_key_env
+    inputTypeName: test_api_key_env_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: ofac
+      dataConnectorObjectType: test_api_key_env
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: test_api_key_env
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - api_key_exists
+          - api_key_length
+          - api_key_preview
+          - env_var_name
+
+---
+kind: Command
+version: v1
+definition:
+  name: test_api_key_env
+  outputType: test_api_key_env!
+  source:
+    dataConnectorName: ofac
+    dataConnectorCommand:
+      function: test_api_key_env
+  graphql:
+    rootFieldName: test_api_key_env
+    rootFieldKind: Query
+  description: Test function to verify OpenSanctions API key is properly
+    configured in environment
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: test_api_key_env
+  permissions:
+    - role: admin
+      allowExecution: true
+

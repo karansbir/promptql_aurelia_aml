@@ -1,0 +1,572 @@
+kind: DataConnectorLink
+version: v1
+definition:
+  name: ofac
+  url:
+    readWriteUrls:
+      read:
+        valueFromEnv: APP_OFAC_READ_URL
+      write:
+        valueFromEnv: APP_OFAC_WRITE_URL
+  headers:
+    Authorization:
+      valueFromEnv: APP_OFAC_AUTHORIZATION_HEADER
+  schema:
+    version: v0.1
+    schema:
+      collections: []
+      functions:
+        - arguments:
+            name:
+              description: null
+              type:
+                name: String
+                type: named
+          description: null
+          name: hello
+          result_type:
+            name: String
+            type: named
+        - arguments:
+            name:
+              description: null
+              type:
+                type: nullable
+                underlying_type:
+                  name: String
+                  type: named
+          description: null
+          name: nullable_hello
+          result_type:
+            name: String
+            type: named
+        - arguments:
+            person:
+              description: null
+              type:
+                name: greet_person_person
+                type: named
+          description: null
+          name: greet_person
+          result_type:
+            name: String
+            type: named
+        - arguments:
+            input:
+              description: null
+              type:
+                name: complex_function_input
+                type: named
+          description: null
+          name: complex_function
+          result_type:
+            name: complex_function
+            type: named
+        - arguments:
+            name:
+              description: null
+              type:
+                name: String
+                type: named
+          description: null
+          name: with_tracing
+          result_type:
+            name: String
+            type: named
+        - arguments:
+            name:
+              description: null
+              type:
+                name: String
+                type: named
+          description: null
+          name: parallel_query
+          result_type:
+            name: String
+            type: named
+        - arguments: {}
+          description: null
+          name: error
+          result_type:
+            name: Json
+            type: named
+        - arguments:
+            foo:
+              description: The optional input Foo
+              type:
+                type: nullable
+                underlying_type:
+                  name: annotations_foo
+                  type: named
+          description: Writing a doc-string like this will become the function/procedure description
+          name: annotations
+          result_type:
+            type: nullable
+            underlying_type:
+              name: annotations
+              type: named
+        - arguments:
+            limit:
+              description: null
+              type:
+                type: nullable
+                underlying_type:
+                  name: Int
+                  type: named
+            query:
+              description: null
+              type:
+                name: String
+                type: named
+          description: Search the OFAC SDN sanctions database for entities matching the query
+          name: search_ofac_sdn
+          result_type:
+            name: search_ofac_sdn
+            type: named
+        - arguments:
+            country:
+              description: null
+              type:
+                type: nullable
+                underlying_type:
+                  name: String
+                  type: named
+            entity_type:
+              description: null
+              type:
+                type: nullable
+                underlying_type:
+                  name: String
+                  type: named
+            name:
+              description: null
+              type:
+                name: String
+                type: named
+          description: Match an entity against the OFAC SDN sanctions database
+          name: match_ofac_entity
+          result_type:
+            name: match_ofac_entity
+            type: named
+        - arguments: {}
+          description: Test function to verify OpenSanctions API key is properly configured in environment
+          name: test_api_key_env
+          result_type:
+            name: test_api_key_env
+            type: named
+      object_types:
+        annotations:
+          description: null
+          fields:
+            bar:
+              description: The bar field
+              type:
+                name: String
+                type: named
+            baz:
+              description: The baz field
+              type:
+                name: String
+                type: named
+        annotations_foo:
+          description: null
+          fields:
+            bar:
+              description: The bar field
+              type:
+                name: String
+                type: named
+            baz:
+              description: The baz field
+              type:
+                name: String
+                type: named
+        complex_function:
+          description: null
+          fields:
+            lists:
+              description: null
+              type:
+                element_type:
+                  element_type:
+                    name: Json
+                    type: named
+                  type: array
+                type: array
+            person:
+              description: null
+              type:
+                type: nullable
+                underlying_type:
+                  name: complex_function_person
+                  type: named
+            x:
+              description: null
+              type:
+                name: Int
+                type: named
+            "y":
+              description: null
+              type:
+                name: Float
+                type: named
+            z:
+              description: null
+              type:
+                name: Boolean
+                type: named
+        complex_function_input:
+          description: null
+          fields:
+            lists:
+              description: null
+              type:
+                element_type:
+                  element_type:
+                    name: Json
+                    type: named
+                  type: array
+                type: array
+            person:
+              description: null
+              type:
+                type: nullable
+                underlying_type:
+                  name: complex_function_input_person
+                  type: named
+            x:
+              description: null
+              type:
+                name: Int
+                type: named
+            "y":
+              description: null
+              type:
+                name: Float
+                type: named
+            z:
+              description: null
+              type:
+                name: Boolean
+                type: named
+        complex_function_input_person:
+          description: null
+          fields:
+            name:
+              description: null
+              type:
+                name: String
+                type: named
+            pets:
+              description: null
+              type:
+                type: nullable
+                underlying_type:
+                  element_type:
+                    name: complex_function_input_person_pets
+                    type: named
+                  type: array
+        complex_function_input_person_pets:
+          description: null
+          fields:
+            name:
+              description: null
+              type:
+                name: String
+                type: named
+        complex_function_person:
+          description: null
+          fields:
+            name:
+              description: null
+              type:
+                name: String
+                type: named
+            pets:
+              description: null
+              type:
+                type: nullable
+                underlying_type:
+                  element_type:
+                    name: complex_function_person_pets
+                    type: named
+                  type: array
+        complex_function_person_pets:
+          description: null
+          fields:
+            name:
+              description: null
+              type:
+                name: String
+                type: named
+        greet_person_person:
+          description: null
+          fields:
+            name:
+              description: null
+              type:
+                name: String
+                type: named
+            pets:
+              description: null
+              type:
+                type: nullable
+                underlying_type:
+                  element_type:
+                    name: greet_person_person_pets
+                    type: named
+                  type: array
+        greet_person_person_pets:
+          description: null
+          fields:
+            name:
+              description: null
+              type:
+                name: String
+                type: named
+        match_ofac_entity:
+          description: null
+          fields:
+            error:
+              description: Error message if match failed
+              type:
+                type: nullable
+                underlying_type:
+                  name: String
+                  type: named
+            matches:
+              description: Matching entities
+              type:
+                element_type:
+                  name: match_ofac_entity_matches
+                  type: named
+                type: array
+            success:
+              description: Whether the match was successful
+              type:
+                name: Boolean
+                type: named
+        match_ofac_entity_matches:
+          description: null
+          fields:
+            address:
+              description: Address
+              type:
+                type: nullable
+                underlying_type:
+                  name: String
+                  type: named
+            birth_date:
+              description: Birth date
+              type:
+                type: nullable
+                underlying_type:
+                  name: String
+                  type: named
+            country:
+              description: Country of origin
+              type:
+                type: nullable
+                underlying_type:
+                  name: String
+                  type: named
+            entity_type:
+              description: Type of entity (Person, Organization, etc.)
+              type:
+                name: String
+                type: named
+            id:
+              description: Unique entity identifier
+              type:
+                name: String
+                type: named
+            list_type:
+              description: Type of sanctions list
+              type:
+                name: String
+                type: named
+            listed_date:
+              description: Date when entity was listed
+              type:
+                name: String
+                type: named
+            name:
+              description: Entity name
+              type:
+                name: String
+                type: named
+            program:
+              description: Sanctions program
+              type:
+                name: String
+                type: named
+            score:
+              description: Matching score
+              type:
+                type: nullable
+                underlying_type:
+                  name: Float
+                  type: named
+        search_ofac_sdn:
+          description: null
+          fields:
+            error:
+              description: Error message if search failed
+              type:
+                type: nullable
+                underlying_type:
+                  name: String
+                  type: named
+            results:
+              description: Search results
+              type:
+                element_type:
+                  name: search_ofac_sdn_results
+                  type: named
+                type: array
+            success:
+              description: Whether the search was successful
+              type:
+                name: Boolean
+                type: named
+            total_count:
+              description: Total number of results
+              type:
+                name: Int
+                type: named
+        search_ofac_sdn_results:
+          description: null
+          fields:
+            address:
+              description: Address
+              type:
+                type: nullable
+                underlying_type:
+                  name: String
+                  type: named
+            birth_date:
+              description: Birth date
+              type:
+                type: nullable
+                underlying_type:
+                  name: String
+                  type: named
+            country:
+              description: Country of origin
+              type:
+                type: nullable
+                underlying_type:
+                  name: String
+                  type: named
+            entity_type:
+              description: Type of entity (Person, Organization, etc.)
+              type:
+                name: String
+                type: named
+            id:
+              description: Unique entity identifier
+              type:
+                name: String
+                type: named
+            list_type:
+              description: Type of sanctions list
+              type:
+                name: String
+                type: named
+            listed_date:
+              description: Date when entity was listed
+              type:
+                name: String
+                type: named
+            name:
+              description: Entity name
+              type:
+                name: String
+                type: named
+            program:
+              description: Sanctions program
+              type:
+                name: String
+                type: named
+            score:
+              description: Matching score
+              type:
+                type: nullable
+                underlying_type:
+                  name: Float
+                  type: named
+        test_api_key_env:
+          description: null
+          fields:
+            api_key_exists:
+              description: Whether the API key environment variable exists
+              type:
+                name: Boolean
+                type: named
+            api_key_length:
+              description: Length of the API key (0 if not found)
+              type:
+                name: Int
+                type: named
+            api_key_preview:
+              description: First 10 characters of API key (masked if longer)
+              type:
+                name: String
+                type: named
+            env_var_name:
+              description: Environment variable name being checked
+              type:
+                name: String
+                type: named
+      procedures:
+        - arguments:
+            any_type_param:
+              description: null
+              type:
+                name: Json
+                type: named
+          description: null
+          name: some_mutation_function
+          result_type:
+            name: Json
+            type: named
+      scalar_types:
+        Boolean:
+          aggregate_functions: {}
+          comparison_operators: {}
+          representation:
+            type: boolean
+        Float:
+          aggregate_functions: {}
+          comparison_operators: {}
+          representation:
+            type: float64
+        HeaderMap:
+          aggregate_functions: {}
+          comparison_operators: {}
+          representation:
+            type: json
+        Int:
+          aggregate_functions: {}
+          comparison_operators: {}
+          representation:
+            type: integer
+        Json:
+          aggregate_functions: {}
+          comparison_operators: {}
+          representation:
+            type: json
+        String:
+          aggregate_functions: {}
+          comparison_operators: {}
+          representation:
+            type: string
+    capabilities:
+      capabilities:
+        mutation:
+          transactional: {}
+        query:
+          aggregates: {}
+          explain: {}
+          variables: {}
+      version: 0.1.6

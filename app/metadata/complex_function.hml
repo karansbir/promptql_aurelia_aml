@@ -1,0 +1,212 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: complex_function_input_person_pets
+  fields:
+    - name: name
+      type: String!
+  graphql:
+    typeName: complex_function_input_person_pets
+    inputTypeName: complex_function_input_person_pets_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: ofac
+      dataConnectorObjectType: complex_function_input_person_pets
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: complex_function_input_person_pets
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - name
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: complex_function_input_person
+  fields:
+    - name: name
+      type: String!
+    - name: pets
+      type: "[complex_function_input_person_pets!]"
+  graphql:
+    typeName: complex_function_input_person
+    inputTypeName: complex_function_input_person_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: ofac
+      dataConnectorObjectType: complex_function_input_person
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: complex_function_input_person
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - name
+          - pets
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: complex_function_input
+  fields:
+    - name: lists
+      type: "[[json!]!]!"
+    - name: person
+      type: complex_function_input_person
+    - name: x
+      type: Int!
+    - name: y
+      type: Float!
+    - name: z
+      type: Boolean!
+  graphql:
+    typeName: complex_function_input
+    inputTypeName: complex_function_input_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: ofac
+      dataConnectorObjectType: complex_function_input
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: complex_function_input
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - lists
+          - person
+          - x
+          - y
+          - z
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: complex_function_person_pets
+  fields:
+    - name: name
+      type: String!
+  graphql:
+    typeName: complex_function_person_pets
+    inputTypeName: complex_function_person_pets_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: ofac
+      dataConnectorObjectType: complex_function_person_pets
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: complex_function_person_pets
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - name
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: complex_function_person
+  fields:
+    - name: name
+      type: String!
+    - name: pets
+      type: "[complex_function_person_pets!]"
+  graphql:
+    typeName: complex_function_person
+    inputTypeName: complex_function_person_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: ofac
+      dataConnectorObjectType: complex_function_person
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: complex_function_person
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - name
+          - pets
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: complex_function
+  fields:
+    - name: lists
+      type: "[[json!]!]!"
+    - name: person
+      type: complex_function_person
+    - name: x
+      type: Int!
+    - name: y
+      type: Float!
+    - name: z
+      type: Boolean!
+  graphql:
+    typeName: complex_function
+    inputTypeName: complex_function_input_1
+  dataConnectorTypeMapping:
+    - dataConnectorName: ofac
+      dataConnectorObjectType: complex_function
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: complex_function
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - lists
+          - person
+          - x
+          - y
+          - z
+
+---
+kind: Command
+version: v1
+definition:
+  name: complex_function
+  outputType: complex_function!
+  arguments:
+    - name: input
+      type: complex_function_input!
+  source:
+    dataConnectorName: ofac
+    dataConnectorCommand:
+      function: complex_function
+  graphql:
+    rootFieldName: complex_function
+    rootFieldKind: Query
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: complex_function
+  permissions:
+    - role: admin
+      allowExecution: true
+

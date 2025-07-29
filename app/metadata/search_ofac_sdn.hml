@@ -1,0 +1,131 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: search_ofac_sdn_results
+  fields:
+    - name: address
+      type: String
+      description: Address
+    - name: birth_date
+      type: String
+      description: Birth date
+    - name: country
+      type: String
+      description: Country of origin
+    - name: entity_type
+      type: String!
+      description: Type of entity (Person, Organization, etc.)
+    - name: id
+      type: String!
+      description: Unique entity identifier
+    - name: list_type
+      type: String!
+      description: Type of sanctions list
+    - name: listed_date
+      type: String!
+      description: Date when entity was listed
+    - name: name
+      type: String!
+      description: Entity name
+    - name: program
+      type: String!
+      description: Sanctions program
+    - name: score
+      type: Float
+      description: Matching score
+  graphql:
+    typeName: search_ofac_sdn_results
+    inputTypeName: search_ofac_sdn_results_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: ofac
+      dataConnectorObjectType: search_ofac_sdn_results
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: search_ofac_sdn_results
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - address
+          - birth_date
+          - country
+          - entity_type
+          - id
+          - list_type
+          - listed_date
+          - name
+          - program
+          - score
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: search_ofac_sdn
+  fields:
+    - name: error
+      type: String
+      description: Error message if search failed
+    - name: results
+      type: "[search_ofac_sdn_results!]!"
+      description: Search results
+    - name: success
+      type: Boolean!
+      description: Whether the search was successful
+    - name: total_count
+      type: Int!
+      description: Total number of results
+  graphql:
+    typeName: search_ofac_sdn
+    inputTypeName: search_ofac_sdn_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: ofac
+      dataConnectorObjectType: search_ofac_sdn
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: search_ofac_sdn
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - error
+          - results
+          - success
+          - total_count
+
+---
+kind: Command
+version: v1
+definition:
+  name: search_ofac_sdn
+  outputType: search_ofac_sdn!
+  arguments:
+    - name: limit
+      type: Int
+    - name: query
+      type: String!
+  source:
+    dataConnectorName: ofac
+    dataConnectorCommand:
+      function: search_ofac_sdn
+  graphql:
+    rootFieldName: search_ofac_sdn
+    rootFieldKind: Query
+  description: Search the OFAC SDN sanctions database for entities matching the query
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: search_ofac_sdn
+  permissions:
+    - role: admin
+      allowExecution: true
+

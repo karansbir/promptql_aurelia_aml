@@ -1,0 +1,129 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: match_ofac_entity_matches
+  fields:
+    - name: address
+      type: String
+      description: Address
+    - name: birth_date
+      type: String
+      description: Birth date
+    - name: country
+      type: String
+      description: Country of origin
+    - name: entity_type
+      type: String!
+      description: Type of entity (Person, Organization, etc.)
+    - name: id
+      type: String!
+      description: Unique entity identifier
+    - name: list_type
+      type: String!
+      description: Type of sanctions list
+    - name: listed_date
+      type: String!
+      description: Date when entity was listed
+    - name: name
+      type: String!
+      description: Entity name
+    - name: program
+      type: String!
+      description: Sanctions program
+    - name: score
+      type: Float
+      description: Matching score
+  graphql:
+    typeName: match_ofac_entity_matches
+    inputTypeName: match_ofac_entity_matches_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: ofac
+      dataConnectorObjectType: match_ofac_entity_matches
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: match_ofac_entity_matches
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - address
+          - birth_date
+          - country
+          - entity_type
+          - id
+          - list_type
+          - listed_date
+          - name
+          - program
+          - score
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: match_ofac_entity
+  fields:
+    - name: error
+      type: String
+      description: Error message if match failed
+    - name: matches
+      type: "[match_ofac_entity_matches!]!"
+      description: Matching entities
+    - name: success
+      type: Boolean!
+      description: Whether the match was successful
+  graphql:
+    typeName: match_ofac_entity
+    inputTypeName: match_ofac_entity_input
+  dataConnectorTypeMapping:
+    - dataConnectorName: ofac
+      dataConnectorObjectType: match_ofac_entity
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: match_ofac_entity
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - error
+          - matches
+          - success
+
+---
+kind: Command
+version: v1
+definition:
+  name: match_ofac_entity
+  outputType: match_ofac_entity!
+  arguments:
+    - name: country
+      type: String
+    - name: entity_type
+      type: String
+    - name: name
+      type: String!
+  source:
+    dataConnectorName: ofac
+    dataConnectorCommand:
+      function: match_ofac_entity
+  graphql:
+    rootFieldName: match_ofac_entity
+    rootFieldKind: Query
+  description: Match an entity against the OFAC SDN sanctions database
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: match_ofac_entity
+  permissions:
+    - role: admin
+      allowExecution: true
+

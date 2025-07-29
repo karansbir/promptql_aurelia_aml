@@ -1,0 +1,26 @@
+---
+kind: Command
+version: v1
+definition:
+  name: nullable_hello
+  outputType: String!
+  arguments:
+    - name: name
+      type: String
+  source:
+    dataConnectorName: ofac
+    dataConnectorCommand:
+      function: nullable_hello
+  graphql:
+    rootFieldName: nullable_hello
+    rootFieldKind: Query
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: nullable_hello
+  permissions:
+    - role: admin
+      allowExecution: true
+

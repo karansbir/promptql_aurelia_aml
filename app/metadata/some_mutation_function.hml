@@ -1,0 +1,26 @@
+---
+kind: Command
+version: v1
+definition:
+  name: some_mutation_function
+  outputType: json!
+  arguments:
+    - name: any_type_param
+      type: json!
+  source:
+    dataConnectorName: ofac
+    dataConnectorCommand:
+      procedure: some_mutation_function
+  graphql:
+    rootFieldName: some_mutation_function
+    rootFieldKind: Mutation
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: some_mutation_function
+  permissions:
+    - role: admin
+      allowExecution: true
+

@@ -1,0 +1,23 @@
+---
+kind: Command
+version: v1
+definition:
+  name: error
+  outputType: json!
+  source:
+    dataConnectorName: ofac
+    dataConnectorCommand:
+      function: error
+  graphql:
+    rootFieldName: error
+    rootFieldKind: Query
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: error
+  permissions:
+    - role: admin
+      allowExecution: true
+
